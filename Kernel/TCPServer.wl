@@ -24,12 +24,16 @@
   |                  {next}                         |
   +-------------------------------------------------+*)
 
+(* ::Section::Closed:: *)
+(*Requarements*)
+
+
+Once[If[PacletFind["KirillBelov/Internal"] === {}, PacletInstall["KirillBelov/Internal"]]]; 
+Once[If[PacletFind["KirillBelov/Objects"] === {}, PacletInstall["KirillBelov/Objects"]]]; 
+
 
 (* ::Section::Closed:: *)
 (*Begin package*)
-
-
-Once[If[PacletFind["KirillBelov/Objects"] === {}, PacletInstall["KirillBelov/Objects"]]]; 
 
 
 BeginPackage["KirillBelov`TCPServer`", {"KirillBelov`Objects`"}]; 
@@ -105,7 +109,7 @@ Module[{data, dataLength, buffer, last, expectedLength, storedLength, completed}
 		expectedLength = last["ExpectedLength"]; 
 		storedLength = last["StoredLength"]; , 
 	(*Else*)
-		expectedLength = conditionApply[server["CompleteHandler"], Function[Length[#2]]][client, data]; 
+		expectedLength = ConditionApply[server["CompleteHandler"], Function[Length[#2]]][client, data]; 
 		storedLength = 0; 
 	]; 
 
@@ -134,7 +138,7 @@ If[KeyExistsQ[server["Buffer"], uuid] && server["Buffer", uuid]["Length"] > 0,
 
 
 TCPServer /: invokeHandler[server_TCPServer, client_SocketObject, message_ByteArray] := 
-conditionApply[server["MessageHandler"], Function[Close[#1]]][client, message]
+ConditionApply[server["MessageHandler"], Function[Close[#1]]][client, message]
 
 
 TCPServer /: sendResponse[server_TCPServer, client_SocketObject, result: _String | _ByteArray | Null] := 
@@ -158,14 +162,6 @@ TCPServer /: clearBuffer[server_TCPServer, SocketObject[uuid_String]] :=
 If[KeyExistsQ[server["Buffer"], uuid], 
 	server["Buffer", uuid]["DropAll"]
 ]; 
-
-
-(* ::Section::Closed:: *)
-(*Internal funcs*)
-
-
-conditionApply[conditionsAndFunctions_Association: <||>, defalut_: Function[Null], ___] := 
-Function[Last[SelectFirst[conditionsAndFunctions, Function[cf, First[cf][##]], {defalut}]][##]]; 
 
 
 (* ::Section::Closed:: *)
