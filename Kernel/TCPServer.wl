@@ -73,24 +73,17 @@ CreateType[TCPServer, {
 server_TCPServer[packet_Association] := 
 Module[{logger, client, extendedPacket, message, result}, 
 	logger = server["Logger"]; 
-	logger["Packet received", packet]; 
-	
 	client = packet["SourceSocket"]; (*SocketObject[]*)
-	logger["Current clinet", client]; 
-
 	extendedPacket = getExtendedPacket[server, client, packet]; (*Association[]*)
-	logger["Extended packet", extendedPacket]; 
-	
+	logger["Received `DataLength` bytes of message with length `ExpectedLength` bytes", extendedPacket]; 
+
 	If[extendedPacket["Completed"], 
-		logger["Packet completed", extendedPacket]; 
 		message = getMessage[server, client, extendedPacket]; (*ByteArray[]*)
-		logger["Received message", message]; 
 		result = invokeHandler[server, client, message]; (*ByteArray[] | Null*)
-		logger["Handler result", result]; 
 		sendResponse[server, client, result]; 
+		logger["Sent `` bytes", Length[result]]; 
 		clearBuffler[server, client], 
 	(*Else*)
-		logger["Packet buffered", extendedPacket]; 
 		savePacketToBuffer[server, client, extendedPacket]
 	]; 
 ]; 
