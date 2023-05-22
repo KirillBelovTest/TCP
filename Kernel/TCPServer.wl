@@ -36,7 +36,7 @@ Once[If[PacletFind["KirillBelov/Objects"] === {}, PacletInstall["KirillBelov/Obj
 (*Begin package*)
 
 
-BeginPackage["KirillBelov`TCPServer`", {"KirillBelov`Objects`"}]; 
+BeginPackage["KirillBelov`TCPServer`", {"KirillBelov`Objects`", "KirillBelov`Internal`"}]; 
 
 
 (* ::Section::Closed:: *)
