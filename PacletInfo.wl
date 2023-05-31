@@ -1,30 +1,29 @@
+(* ::Package:: *)
+
 PacletObject[
-	<|
-		"Name" -> "KirillBelov/TCPServer", 
-		"Description" -> "TCP Server", 
-		"Creator" -> "Kirill Belov", 
-		"License" -> "MIT", 
-		"PublisherID" -> "KirillBelov", 
-		"Version" -> "1.0.0", 
-		"WolframVersion" -> "13+", 
-		"Extensions" -> {
-			{
-				"Kernel", 
-				"Root" -> "Kernel", 
-				"Context" -> {"KirillBelov`TCPServer`"}, 
-				"Symbols" -> {}
-			}, 
-			{
-				"Documentation", 
-				"Language" -> "English"
-			}, 
-			{
-				"Asset", 
-				"Assets" -> {
-					{"License", "./LICENSE"}, 
-					{"ReadMe", "./README.md"}
-				}
-			}
-		}
-	|>
+  <|
+    "Name" -> "KirillBelov/TCPServer",
+    "Description" -> "TCP Server",
+    "Creator" -> "Kirill Belov",
+    "License" -> "MIT",
+    "PublisherID" -> "KirillBelov",
+    "Version" -> "1.0.1",
+    "WolframVersion" -> "13+",
+    "Extensions" -> {
+      {
+        "Kernel",
+        "Root" -> "Kernel",
+        "Context" -> {"KirillBelov`TCPServer`"},
+        "Symbols" -> {}
+      },
+      {"Documentation", "Language" -> "English"},
+      {
+        "Asset",
+        "Assets" -> {
+          {"License", "./LICENSE"},
+          {"ReadMe", "./README.md"}
+        }
+      }
+    }
+  |>
 ]

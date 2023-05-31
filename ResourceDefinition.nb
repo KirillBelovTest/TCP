@@ -35,7 +35,7 @@ Cell["", "FileManagerTopSpacer",
  CellGroupingRules->{"SectionGrouping", 99},
  TaggingRules->{},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->276215395,ExpressionUUID->"4fce0c24-c204-456c-aa87-e510c6717421"],
+ CellID->276215395,ExpressionUUID->"70cccf75-5a21-4d88-8b87-34c6e413070e"],
 
 Cell[TextData[Cell[BoxData[
  InterpretationBox[
@@ -62,7 +62,7 @@ Cell[TextData[Cell[BoxData[
     NotebookDirectory[], "Documentation"}],
   BoxID -> "FileTreePath",
   BaseStyle->{
-   "Text"}]],ExpressionUUID->"1351e442-c17f-4182-b138-cdaf41962396"]], \
+   "Text"}]],ExpressionUUID->"5a59e87b-4c64-4085-a44d-c60f1ba65924"]], \
 "FileManagerDirectory",
  CellMargins->{{Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 100},
@@ -73,7 +73,7 @@ Cell[TextData[Cell[BoxData[
       TemplateBox[{}, "FileManagerDocumentationIconTemplate"]], Background -> 
      None], Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->406656709,ExpressionUUID->"372d3957-1f89-45ec-abdb-fa07ca3080ae"],
+ CellID->406656709,ExpressionUUID->"4721c2a2-4143-40ee-a9dd-d4ca7efe7d3f"],
 
 Cell[CellGroupData[{
 
@@ -101,7 +101,7 @@ Cell[TextData[Cell[BoxData[
     NotebookDirectory[], "Kernel"}],
   BoxID -> "FileTreePath",
   BaseStyle->{
-   "Text"}]],ExpressionUUID->"cb5a0cf4-0510-405a-89b4-6f5de6554367"]], \
+   "Text"}]],ExpressionUUID->"438a3eda-2de6-4bf8-8c6d-ebe01410c217"]], \
 "FileManagerDirectory",
  CellMargins->{{Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 100},
@@ -112,7 +112,7 @@ Cell[TextData[Cell[BoxData[
       TemplateBox[{}, "FileManagerKernelIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->741016020,ExpressionUUID->"fd5f61f4-472b-415a-92a3-11077193ffc2"],
+ CellID->741016020,ExpressionUUID->"b9088f57-2d16-42e3-a7aa-111a725c9765"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -136,7 +136,7 @@ Cell[BoxData[
       TemplateBox[{}, "FileManagerWLIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->6360125,ExpressionUUID->"162c898c-8482-481a-803e-cfb07dc4f505"]
+ CellID->6360125,ExpressionUUID->"188da12d-98d5-43aa-b6b2-68fae5e43bd2"]
 }, Open  ]],
 
 Cell[BoxData[
@@ -161,7 +161,7 @@ Cell[BoxData[
       TemplateBox[{}, "FileManagerUnknownIconTemplate"]], Background -> None],
      Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->297155,ExpressionUUID->"3b3b8c5c-8058-44db-8e29-0fb08ff36f61"],
+ CellID->297155,ExpressionUUID->"36111761-a590-4dbf-aeed-aafa4dc479c8"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -185,7 +185,7 @@ Cell[BoxData[
       TemplateBox[{}, "FileManagerPacletInfoIconTemplate"]], Background -> 
      None], Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->361730063,ExpressionUUID->"47854656-e827-4266-99a8-e50e6286a561"],
+ CellID->361730063,ExpressionUUID->"3454790d-3d33-4705-b666-28ad4c63b12e"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -209,7 +209,7 @@ Cell[BoxData[
       TemplateBox[{}, "FileManagerTXTIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->281711406,ExpressionUUID->"00b4ff6c-5714-444c-bce1-d5ac3be7ace3"],
+ CellID->281711406,ExpressionUUID->"9bd096d3-aa12-4006-85d5-552bd24101bd"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -233,13 +233,13 @@ Cell[BoxData[
       TemplateBox[{}, "FileManagerNBIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->901711824,ExpressionUUID->"84668edc-9b7f-4409-81e6-d8d3932e9b4c"],
+ CellID->901711824,ExpressionUUID->"37cdc256-30be-4f9f-ae60-2f3a804f2b8f"],
 
 Cell["", "FileManagerBottomSpacer",
  CellGroupingRules->{"SectionGrouping", 100},
  TaggingRules->{},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->432389423,ExpressionUUID->"db14578e-af67-4095-9e37-66464d8bea52"]
+ CellID->432389423,ExpressionUUID->"141b6962-4984-4b28-b116-1f07946630b5"]
 }, Open  ]]
 }, Open  ]],
 
@@ -13893,7 +13893,7 @@ text that users will see when visiting the main landing page of your paclet.",
  CellLabel->"In[1]:=",
  CellID->433339604,ExpressionUUID->"1673a744-4892-4474-b1c8-5bbafae16022"],
 
-Cell["A paragraph that describes your paclet in more detail.", "Text",
+Cell["TCP Server", "Text",
  TaggingRules->{},
  CellTags->"DefaultContent",
  CellID->441612482,ExpressionUUID->"a4d9dd24-5f7b-4293-b8b6-ce6cdad5b2ac"]
@@ -13933,7 +13933,7 @@ examples on the webpage for the resource.", "MoreInfoText"], Background ->
  CellLabel->"In[1]:=",
  CellID->484110581,ExpressionUUID->"fa426d47-b4a5-47f0-a0b8-ab5b226c792a"],
 
-Cell["Additional information about the paclet.", "Notes",
+Cell["TCP Server", "Notes",
  TaggingRules->{},
  CellTags->"DefaultContent",
  CellID->889292814,ExpressionUUID->"974a457d-57c2-4171-b2bc-1886b5712f41"]
@@ -15045,8 +15045,7 @@ Cell[BoxData[
                  21.959, 14.8984}}}]}, {
                 FaceForm[{
                   RGBColor[
-                  0.9490000000000001, 0.9490000000000001, 0.9490000000000001],
-                   
+                  0.9490000000000001, 0.9490000000000001, 0.9490000000000001], 
                   Opacity[1.]}], 
                 
                 FilledCurveBox[{{{0, 2, 0}, {1, 3, 3}, {0, 1, 0}, {1, 3, 
@@ -15417,7 +15416,6 @@ Cell[BoxData[
                     21.188000000000002`}, {43.783, 21.188000000000002`}, {
                     43.783, 8.569}}]}}]}, 
                   FilledCurveBox[{{
-                    
                     Line[{{40.947, 4.911}, {59.787000000000006`, 4.911}, {
                     59.787000000000006`, 6.922}, {40.947, 6.922}, {40.947, 
                     4.911}}]}}], 
@@ -17323,7 +17321,17 @@ Cell["KirillBelov/Objects", "Item",
        SelectedNotebook[], All, CellContents, AutoScroll -> True]], 
    PassEventsDown -> False, PassEventsUp -> False},
  CellTags->{"DefaultContent", "TabNext"},
- CellID->694609509,ExpressionUUID->"f82c4e31-b615-49e8-af9d-8ac5d1535047"]
+ CellID->694609509,ExpressionUUID->"f82c4e31-b615-49e8-af9d-8ac5d1535047"],
+
+Cell["KirillBelov/Internal", "Item",
+ TaggingRules->{},
+ CellEventActions->{Inherited, {"KeyDown", "\t"} :> Replace[SelectionMove[
+       SelectedNotebook[], After, Cell]; NotebookFind[
+       SelectedNotebook[], "TabNext", Next, CellTags, AutoScroll -> True, 
+       WrapAround -> True], Blank[NotebookSelection] :> SelectionMove[
+       SelectedNotebook[], All, CellContents, AutoScroll -> True]], 
+   PassEventsDown -> False, PassEventsUp -> False},
+ CellID->20644121,ExpressionUUID->"041a52ba-a0d8-44c6-868e-18e04e41b611"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -17648,6 +17656,7 @@ Cell[BoxData[
          StyleBox[
           TemplateBox[{
             CheckboxBox["Session", {False, "Session"}], "\" \"", 
+            
             TemplateBox[{
              "\"Session\"", "\"Local or cloud interactive session\""}, 
              "PrettyTooltipTemplate"]},
@@ -18412,9 +18421,9 @@ system do not require a disclosure.", "MoreInfoText"], Background ->
                    GrayLevel[0.95], FrameMargins -> 20, FrameStyle -> 
                    GrayLevel[0.9], RoundingRadius -> 5, ImageSize -> {
                     Scaled[0.65], Automatic}]], "MoreInfoText", Deletable -> 
-                 True, CellTags -> {
-                  "SectionMoreInfoDisclosuresPacletDependencies"}, 
-                 CellMargins -> {{66, 66}, {15, 15}}], 
+                 True, 
+                 CellTags -> {"SectionMoreInfoDisclosuresPacletDependencies"},
+                  CellMargins -> {{66, 66}, {15, 15}}], 
                 HoldComplete[
                  EvaluationCell[]], "Click for more information"}, 
                "InlineMoreInfoOpenerButtonTemplate"]}, "RowDefault"]},
@@ -18746,8 +18755,8 @@ Cell["Additional information about limitations, issues, etc.", "Text",
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{958, 980},
-WindowMargins->{{Automatic, -7}, {Automatic, 0}},
+WindowSize->{901, 833},
+WindowMargins->{{Automatic, 300}, {Automatic, 47}},
 WindowTitle->"TCPServer | Definition Notebook",
 DockedCells->{
   Cell[
@@ -18808,25 +18817,25 @@ Fu6DuJJG2H9mK2QZ3X1Y8rjKVdsLU11Qbnfn/Mae/TiO1RZHs2bny+6Vwq5Sfi8TnHKi+1+K4NOh"]\
   "PacletBuildData" -> {
    "LastBuiltArchive" -> 
     "C:\\Users\\Kirill\\Projects\\TCPServer\\build\\KirillBelov__TCPServer-1.\
-0.0.paclet", "FileHashes" -> 
+0.1.paclet", "FileHashes" -> 
     ByteArray[{56, 67, 58, 120, 156, 115, 228, 212, 13, 86, 115, 201, 79, 46, 
       205, 77, 205, 43, 73, 44, 201, 204, 207, 211, 119, 205, 75, 207, 201, 
       44, 206, 208, 247, 204, 75, 73, 173, 208, 47, 78, 77, 7, 73, 21, 199, 
       27, 58, 50, 233, 6, 179, 5, 231, 151, 22, 37, 167, 22, 179, 248, 229, 
-      231, 165, 2, 185, 33, 137, 69, 233, 169, 37, 62, 93, 71, 87, 133, 126, 
-      142, 249, 95, 172, 27, 172, 65, 140, 89, 122, 233, 169, 121, 120, 76, 
-      235, 140, 123, 120, 182, 122, 246, 83, 69, 221, 96, 109, 236, 166, 5, 
-      23, 164, 230, 228, 144, 224, 188, 107, 62, 123, 126, 173, 102, 255, 92, 
-      167, 27, 172, 75, 180, 129, 68, 187, 81, 216, 59, 181, 40, 47, 53, 71, 
-      63, 196, 57, 32, 56, 181, 168, 44, 181, 72, 175, 60, 7, 73, 163, 207, 
-      142, 235, 210, 202, 188, 166, 127, 229, 17, 122, 17, 34, 236, 62, 158, 
-      206, 174, 126, 193, 174, 200, 234, 213, 69, 182, 104, 189, 188, 187, 54,
-       0, 161, 30, 33, 194, 27, 144, 152, 156, 147, 90, 226, 153, 151, 150, 
-      143, 102, 11, 231, 142, 167, 217, 197, 115, 141, 184, 16, 186, 16, 34, 
-      130, 16, 93, 190, 137, 121, 153, 105, 169, 197, 37, 168, 58, 209, 61, 
-      86, 163, 183, 119, 78, 36, 91, 33, 179, 110, 48, 103, 144, 171, 163, 
-      139, 175, 171, 94, 110, 10, 178, 69, 215, 164, 50, 178, 26, 39, 76, 103,
-       67, 10, 93, 168, 8, 0, 4, 254, 212, 108}]}},
+      231, 165, 2, 185, 33, 137, 69, 233, 169, 37, 62, 85, 186, 158, 110, 167,
+       51, 88, 20, 116, 131, 53, 136, 49, 75, 47, 61, 53, 15, 143, 105, 157, 
+      113, 15, 207, 86, 207, 126, 170, 168, 27, 172, 141, 221, 180, 224, 130, 
+      212, 156, 28, 18, 156, 23, 191, 230, 95, 246, 86, 47, 43, 49, 221, 96, 
+      93, 162, 13, 36, 218, 141, 194, 222, 169, 69, 121, 169, 57, 250, 33, 
+      206, 1, 193, 169, 69, 101, 169, 69, 122, 229, 57, 72, 26, 125, 92, 204, 
+      182, 213, 152, 115, 93, 206, 64, 232, 69, 136, 176, 251, 120, 58, 187, 
+      250, 5, 187, 34, 171, 87, 23, 217, 162, 245, 242, 238, 218, 0, 132, 122,
+       132, 8, 111, 64, 98, 114, 78, 106, 137, 103, 94, 90, 62, 154, 45, 165, 
+      17, 21, 223, 163, 127, 205, 177, 68, 232, 66, 136, 8, 66, 116, 249, 38, 
+      230, 101, 166, 165, 22, 151, 160, 234, 68, 247, 216, 250, 69, 92, 17, 
+      11, 117, 102, 70, 233, 6, 115, 6, 185, 58, 186, 248, 186, 234, 229, 166,
+       32, 91, 116, 77, 42, 35, 171, 113, 194, 116, 54, 132, 14, 152, 8, 0, 
+      87, 169, 211, 91}]}},
 CreateCellID->True,
 DynamicEvaluationTimeout->60,
 TrackCellChangeTimes->False,
