@@ -24,6 +24,7 @@
   |                  {next}                         |
   +-------------------------------------------------+*)
 
+
 (* ::Section::Closed:: *)
 (*Requarements*)
 
@@ -79,15 +80,16 @@ Module[{logger, client, extendedPacket, message, result},
 	logger = server["Logger"]; 
 	client = packet["SourceSocket"]; (*SocketObject[]*)
 	extendedPacket = getExtendedPacket[server, client, packet]; (*Association[]*)
-	logger["Received `DataLength` bytes of message with length `ExpectedLength` bytes", extendedPacket]; 
+	logger[StringTemplate["Received `DataLength` bytes of message with length `ExpectedLength` bytes."][extendedPacket]]; 
 
 	If[extendedPacket["Completed"], 
 		message = getMessage[server, client, extendedPacket]; (*ByteArray[]*)
 		result = invokeHandler[server, client, message]; (*ByteArray[] | Null*)
 		sendResponse[server, client, result]; 
-		logger["Sent `` bytes", Length[result]]; 
+		logger[StringTemplate["Sending `` bytes."][Length[result]]]; 
 		clearBuffler[server, client], 
 	(*Else*)
+		logger[StringTemplate["Buffered `StoredLength` bytes of `ExpectedLength`. Adding `DataLength` bytes."][extendedPacket]]; 
 		savePacketToBuffer[server, client, extendedPacket]
 	]; 
 ]; 
@@ -98,8 +100,9 @@ Module[{logger, client, extendedPacket, message, result},
 
 
 TCPServer /: getExtendedPacket[server_TCPServer, client: SocketObject[uuid_String], packet_Association] := 
-Module[{data, dataLength, buffer, last, expectedLength, storedLength, completed}, 
+Module[{data, dataLength, buffer, last, expectedLength, storedLength, completed, logger}, 
 	
+	logger = server["Logger"]; 
 	data = packet["DataByteArray"]; 
 	dataLength = Length[data]; 
 
