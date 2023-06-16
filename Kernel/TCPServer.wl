@@ -4,25 +4,26 @@
 (*TCP Server*)
 
 
-(*+-------------------------------------------------+
-  |                HANDLE PACKET                    |
-  |                                                 |
-  |              (receive packet)                   |
-  |                      |                          |
-  |            [get extended packet]                |
-  |                      |                          |
-  |                <is complete>                    |
-  |           yes /             \ no                |
-  |    [get message]      [save packet to buffer]   |
-  |          |                   /                  |
-  |   [invoke handler]          /                   |
-  |          |                 /                    |
-  |   [send response]         /                     |
-  |          |               /                      |
-  |    [clear buffer]       /                       |
-  |                 \      /                        |
-  |                  {next}                         |
-  +-------------------------------------------------+*)
+(* ::Program:: *)
+(*+-------------------------------------------------+*)
+(*|                HANDLE PACKET                    |*)
+(*|                                                 |*)
+(*|              (receive packet)                   |*)
+(*|                      |                          |*)
+(*|            [get extended packet]                |*)
+(*|                      |                          |*)
+(*|                <is complete>                    |*)
+(*|           yes /             \ no                |*)
+(*|    [get message]      [save packet to buffer]   |*)
+(*|          |                   /                  |*)
+(*|   [invoke handler]          /                   |*)
+(*|          |                 /                    |*)
+(*|   [send response]         /                     |*)
+(*|          |               /                      |*)
+(*|    [clear buffer]       /                       |*)
+(*|                 \      /                        |*)
+(*|                  {next}                         |*)
+(*+-------------------------------------------------+*)
 
 
 (* ::Section::Closed:: *)
@@ -55,7 +56,7 @@ TCPServer::usage =
 Begin["`Private`"]; 
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Server*)
 
 
@@ -141,7 +142,7 @@ If[KeyExistsQ[server["Buffer"], uuid] && server["Buffer", uuid]["Length"] > 0,
 
 
 TCPServer /: invokeHandler[server_TCPServer, client_SocketObject, message_ByteArray] := 
-ConditionApply[server["MessageHandler"], Function[Close[#1]]][client, message]
+ConditionApply[server["MessageHandler"], Function[Close[#1]]][client, message]; 
 
 
 TCPServer /: sendResponse[server_TCPServer, client_SocketObject, result: _String | _ByteArray | Null] := 
