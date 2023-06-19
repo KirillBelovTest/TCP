@@ -65,10 +65,11 @@ Begin["`Private`"];
 
 
 CreateType[TCPServer, {
-	"Logger", 
 	"Buffer" -> <||>, 
 	"CompleteHandler" -> <||>, 
-	"MessageHandler" -> <||>
+	"DefaultCompleteHandler" -> $defaultCompleteHandler, 
+	"MessageHandler" -> <||>, 
+	"DefaultMessageHandler" -> $defaultMessageHandler
 }]; 
 
 
@@ -78,19 +79,15 @@ CreateType[TCPServer, {
 
 server_TCPServer[packet_Association] := 
 Module[{logger, client, extendedPacket, message, result}, 
-	logger = server["Logger"]; 
 	client = packet["SourceSocket"]; (*SocketObject[]*)
 	extendedPacket = getExtendedPacket[server, client, packet]; (*Association[]*)
-	logger[StringTemplate["Received `DataLength` bytes of message with length `ExpectedLength` bytes."][extendedPacket]]; 
-
+	
 	If[extendedPacket["Completed"], 
 		message = getMessage[server, client, extendedPacket]; (*ByteArray[]*)
-		result = invokeHandler[server, client, message]; (*ByteArray[] | Null*)
+		result = invokeHandler[server, client, message]; (*ByteArray[] | _String | Null*)
 		sendResponse[server, client, result]; 
-		logger[StringTemplate["Sending `` bytes."][Length[result]]]; 
 		clearBuffler[server, client], 
 	(*Else*)
-		logger[StringTemplate["Buffered `StoredLength` bytes of `ExpectedLength`. Adding `DataLength` bytes."][extendedPacket]]; 
 		savePacketToBuffer[server, client, extendedPacket]
 	]; 
 ]; 
@@ -101,25 +98,28 @@ Module[{logger, client, extendedPacket, message, result},
 
 
 TCPServer /: getExtendedPacket[server_TCPServer, client: SocketObject[uuid_String], packet_Association] := 
-Module[{data, dataLength, buffer, last, expectedLength, storedLength, completed, logger}, 
+Module[{data, dataLength, buffer, last, expectedLength, storedLength, completed, completeHandler, defaultCompleteHandler}, 
 	
-	logger = server["Logger"]; 
-	data = packet["DataByteArray"]; 
+	data = packet["DataByteArray"]; (*ByteArray[]*)
 	dataLength = Length[data]; 
 
+	Print["[", DateString[], "] TCPServer received ", dataLength, " bytes"]; 
+
 	If[KeyExistsQ[server["Buffer"], uuid] && server["Buffer", uuid]["Length"] > 0, 
-		buffer = server["Buffer", uuid]; 
-		last = buffer["Part", -1]; 
+		buffer = server["Buffer", uuid]; (*DataStructure[DynamicArray]*)
+		last = buffer["Part", -1]; (*Association[]*) 
 		expectedLength = last["ExpectedLength"]; 
 		storedLength = last["StoredLength"]; , 
 	(*Else*)
-		expectedLength = ConditionApply[server["CompleteHandler"], Function[Length[#2]]][client, data]; 
+		completeHandler = server["CompleteHandler"]; (*Association[] | Function[]*)
+		defaultCompleteHandler = server["DefaultCompleteHandler"]; (*Function[]*)
+		expectedLength = ConditionApply[completeHandler, defaultCompleteHandler][client, data]; 
 		storedLength = 0; 
 	]; 
 
 	completed = storedLength + dataLength >= expectedLength; 
 
-	(*Return: _Association*)
+	(*Return: Association[]*)
 	Join[packet, <|
 		"Completed" -> completed, 
 		"ExpectedLength" -> expectedLength, 
@@ -131,27 +131,45 @@ Module[{data, dataLength, buffer, last, expectedLength, storedLength, completed,
 
 TCPServer /: getMessage[server_TCPServer, client: SocketObject[uuid_String], extendedPacket_Association] := 
 If[KeyExistsQ[server["Buffer"], uuid] && server["Buffer", uuid]["Length"] > 0, 
+	Print["[", DateString[], "] TCPServer get full message with ", extendedPacket["ExpectedLength"], " bytes"]; 
+	
 	(*Return: _ByteArray*)
 	Apply[Join] @ 
 	Append[extendedPacket["DataByteArray"]] @ 
 	server["Buffer", uuid]["Elements"][[All, "DataByteArray"]], 
 (*Else*)
+	Print["[", DateString[], "] TCPServer get full message with ", extendedPacket["ExpectedLength"], " bytes"]; 
+
 	(*Return: _ByteArray*)
 	extendedPacket["DataByteArray"]
 ]; 
 
 
 TCPServer /: invokeHandler[server_TCPServer, client_SocketObject, message_ByteArray] := 
-ConditionApply[server["MessageHandler"], Function[Close[#1]]][client, message]; 
+Module[{messageHandler, defaultMessageHandler}, 
+	Print["[", DateString[], "] TCPServer invoke message handler"]; 
+
+	messageHandler = server["MessageHandler"]; 
+	defaultMessageHandler = server["DefaultMessageHandler"]; 
+
+	(*Return: ByteArray[] | _String | Null*)
+	ConditionApply[messageHandler, defaultMessageHandler][client, message]
+]; 
 
 
-TCPServer /: sendResponse[server_TCPServer, client_SocketObject, result: _String | _ByteArray | Null] := 
-Module[{t = AbsoluteTime[]}, 
-	Switch[result, 
-		_String, WriteString[client, result], 
-		_ByteArray, BinaryWrite[client, result], 
-		Null, Null
-	]
+TCPServer /: sendResponse[server_TCPServer, client_SocketObject, result: _ByteArray | _String | Null] := 
+Switch[result, 
+	_String, 
+		Print["[", DateString[], "] TCPServer sending response"]; 
+		WriteString[client, result], 
+	
+	_ByteArray, 
+		Print["[", DateString[], "] TCPServer sending response"]; 
+		BinaryWrite[client, result], 
+	
+	Null, 
+		Print["[", DateString[], "] TCPServer handle message without response"]; 
+		Null
 ]; 
 
 
@@ -164,8 +182,21 @@ If[KeyExistsQ[server["Buffer"], uuid],
 
 TCPServer /: clearBuffer[server_TCPServer, SocketObject[uuid_String]] := 
 If[KeyExistsQ[server["Buffer"], uuid], 
-	server["Buffer", uuid]["DropAll"]
+	server["Buffer", uuid]["DropAll"]; 
+	server["Buffer"] = Delete[server["Buffer"], Key[uuid]]; 
 ]; 
+
+
+(* ::Section::Closed:: *)
+(*Defaults*)
+
+
+$defaultCompleteHandler = 
+Function[{client, data}, Length[data]]; 
+
+
+$defaultMessageHandler = 
+Function[{client, data}, Close[client]]; 
 
 
 (* ::Section::Closed:: *)
