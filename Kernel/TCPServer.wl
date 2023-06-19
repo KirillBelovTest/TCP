@@ -81,7 +81,6 @@ server_TCPServer[packet_Association] :=
 Module[{logger, client, extendedPacket, message, result}, 
 	client = packet["SourceSocket"]; (*SocketObject[]*)
 	extendedPacket = getExtendedPacket[server, client, packet]; (*Association[]*)
-	
 	If[extendedPacket["Completed"], 
 		message = getMessage[server, client, extendedPacket]; (*ByteArray[]*)
 		result = invokeHandler[server, client, message]; (*ByteArray[] | _String | Null*)
