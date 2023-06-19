@@ -18837,202 +18837,7 @@ DockedCells->{
    CellFrameMargins -> {{0, 0}, {2, 2}}, CellFrame -> {{0, 0}, {1, 0}}, 
    CacheGraphics -> False, CellOpen -> Dynamic[
      CurrentValue[
-      EvaluationNotebook[], {TaggingRules, "ToolsOpen"}, True]]], 
-  Cell[
-   BoxData[
-    StyleBox[
-     TagBox[
-      GridBox[{{
-         OverlayBox[{
-           StyleBox[
-            TagBox[
-             DynamicModuleBox[{Typeset`var$$ = False}, 
-              InterpretationBox[
-               StyleBox[
-                PaneSelectorBox[{False -> GridBox[{{
-                    OpenerBox[
-                    Dynamic[Typeset`var$$], Appearance -> Automatic, Enabled -> 
-                    Automatic, AutoAction -> False, ContinuousAction -> 
-                    False], 
-                    StyleBox[
-                    DynamicBox[
-                    ToBoxes[
-                    DateString[
-                    TimeZoneConvert[
-                    DateObject[
-                    3.8961661091010069`17.34321245346718*^9, TimeZone -> 
-                    0]], {"MonthName", " ", "DayShort", ", ", "Year", " ", 
-                    "Hour12Short", ":", "Minute", " ", "AMPMLowerCase"}], 
-                    StandardForm], SingleEvaluation -> True, Evaluator -> 
-                    "System"], FontSlant -> Italic, FontColor -> 
-                    GrayLevel[0.5], FontSize -> 0.9 Inherited, StripOnInput -> 
-                    False]}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
-                    AutoDelete -> False, 
-                    GridBoxBackground -> {"Columns" -> {{Automatic}}}, 
-                    GridBoxItemSize -> {
-                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
-                    GridBoxSpacings -> {
-                    "Columns" -> {{0.2}}, "Rows" -> {{0.5}}}, 
-                    BaselinePosition -> {1, 1}], True -> GridBox[{{
-                    OpenerBox[
-                    Dynamic[Typeset`var$$], Appearance -> Automatic, Enabled -> 
-                    Automatic, AutoAction -> False, ContinuousAction -> 
-                    False], 
-                    StyleBox[
-                    DynamicBox[
-                    ToBoxes[
-                    DateString[
-                    TimeZoneConvert[
-                    DateObject[
-                    3.8961661091010069`17.34321245346718*^9, TimeZone -> 
-                    0]], {"MonthName", " ", "DayShort", ", ", "Year", " ", 
-                    "Hour12Short", ":", "Minute", " ", "AMPMLowerCase"}], 
-                    StandardForm], SingleEvaluation -> True, Evaluator -> 
-                    "System"], FontSlant -> Italic, FontColor -> 
-                    GrayLevel[0.5], FontSize -> 0.9 Inherited, StripOnInput -> 
-                    False]}, {"", 
-                    PaneBox["\"\"", ImageMargins -> 0]}}, 
-                    GridBoxAlignment -> {"Columns" -> {{Left}}}, AutoDelete -> 
-                    False, GridBoxBackground -> {"Columns" -> {{Automatic}}}, 
-                    GridBoxItemSize -> {
-                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
-                    GridBoxSpacings -> {
-                    "Columns" -> {{0.2}}, "Rows" -> {{0.5}}}, 
-                    BaselinePosition -> {1, 1}]}, 
-                 Dynamic[Typeset`var$$], Alignment -> Automatic, ImageSize -> 
-                 Automatic, ImageMargins -> 0, BaseStyle -> {}, 
-                 DefaultBaseStyle -> "OpenerView", BaselinePosition -> 
-                 Baseline], Deployed -> False, StripOnInput -> False], 
-               OpenerView[{
-                 Style[
-                  Dynamic[
-                   DateString[
-                    TimeZoneConvert[
-                    DateObject[
-                    3.8961661091010069`17.34321245346718*^9, TimeZone -> 
-                    0]], {"MonthName", " ", "DayShort", ", ", "Year", " ", 
-                    "Hour12Short", ":", "Minute", " ", "AMPMLowerCase"}], 
-                   SingleEvaluation -> True, Evaluator -> "System"], 
-                  FontSlant -> Italic, FontColor -> GrayLevel[0.5], FontSize -> 
-                  0.9 Inherited], ""}, False]], DynamicModuleValues -> 
-              Automatic], Setting[#, {0}]& ], ShowContents -> False, 
-            StripOnInput -> False], 
-           StyleBox[
-            DynamicBox[
-             ToBoxes[
-              DateString[
-               TimeZoneConvert[
-                DateObject[
-                3.8961661091010069`17.34321245346718*^9, TimeZone -> 0]], {
-               "MonthName", " ", "DayShort", ", ", "Year", " ", "Hour12Short",
-                 ":", "Minute", " ", "AMPMLowerCase"}], StandardForm], 
-             SingleEvaluation -> True, Evaluator -> "System"], FontSlant -> 
-            Italic, FontColor -> GrayLevel[0.5], FontSize -> 0.9 Inherited, 
-            StripOnInput -> False]}, Alignment -> {Right, Baseline}], 
-         "\"   \"", 
-         ItemBox[
-          StyleBox[
-           
-           DynamicModuleBox[{
-            DefinitionNotebookClient`Utilities`PackagePrivate`pi$$ = Mouseover[
-               Dynamic[
-               DefinitionNotebookClient`$StripeProgressDisplay, 
-                TrackedSymbols :> {
-                 DefinitionNotebookClient`$StripeProgressDisplay}], 
-               Button["Abort \[RightGuillemet]", FrontEndExecute[
-                  FrontEnd`EvaluatorAbort[Automatic]]; 
-                DefinitionNotebookClient`$ButtonsDisabled = False; Null, 
-                Appearance -> None, BaseStyle -> Dynamic[
-                  FEPrivate`If[
-                   CurrentValue["MouseOver"], {"HyperlinkActive"}, {
-                   "Hyperlink"}]], Method -> "Preemptive"], ImageSize -> 
-               All]}, 
-            DynamicBox[
-             ToBoxes[
-             DefinitionNotebookClient`Utilities`PackagePrivate`pi$$, 
-              StandardForm], 
-             TrackedSymbols :> {
-              DefinitionNotebookClient`Utilities`PackagePrivate`pi$$}], 
-            Initialization :> 
-            If[$SessionID =!= 26823333378477548437, 
-              DefinitionNotebookClient`Utilities`PackagePrivate`pi$$ = ""], 
-            DynamicModuleValues :> {}], LineBreakWithin -> Automatic, 
-           LineIndent -> 0, StripOnInput -> False], ItemSize -> Fit, 
-          StripOnInput -> False], "\"\"", 
-         TagBox[
-          ButtonBox[
-           TagBox[
-            PaneSelectorBox[{False -> GraphicsBox[{
-                 GrayLevel[
-                  NCache[
-                   Rational[64, 85], 0.7529411764705882]], 
-                 
-                 PolygonBox[{{-0.282842712474619, -0.42426406871192845`}, \
-{-0.42426406871192845`, -0.282842712474619}, {0.282842712474619, 
-                  0.42426406871192845`}, {0.42426406871192845`, 
-                  0.282842712474619}}], 
-                 
-                 PolygonBox[{{0.42426406871192845`, -0.282842712474619}, {
-                  0.282842712474619, -0.42426406871192845`}, \
-{-0.42426406871192845`, 0.282842712474619}, {-0.282842712474619, 
-                  0.42426406871192845`}}]}, ImageSize -> 18, PlotRangePadding -> 
-                0, PlotRange -> 0.7, Background -> None], True -> GraphicsBox[{
-                 GrayLevel[
-                  NCache[
-                   Rational[128, 255], 0.5019607843137255]], 
-                 
-                 PolygonBox[{{-0.282842712474619, -0.42426406871192845`}, \
-{-0.42426406871192845`, -0.282842712474619}, {0.282842712474619, 
-                  0.42426406871192845`}, {0.42426406871192845`, 
-                  0.282842712474619}}], 
-                 
-                 PolygonBox[{{0.42426406871192845`, -0.282842712474619}, {
-                  0.282842712474619, -0.42426406871192845`}, \
-{-0.42426406871192845`, 0.282842712474619}, {-0.282842712474619, 
-                  0.42426406871192845`}}]}, ImageSize -> 18, PlotRangePadding -> 
-                0, PlotRange -> 0.7, Background -> None]}, 
-             Dynamic[
-              CurrentValue["MouseOver"]], ImageSize -> Automatic, 
-             FrameMargins -> 0], 
-            MouseAppearanceTag["LinkHand"]], ButtonFunction :> 
-           With[{DefinitionNotebookClient`Stripes`PackagePrivate`nbo$ = 
-              EvaluationNotebook[]}, 
-             CurrentValue[
-              DefinitionNotebookClient`Stripes`PackagePrivate`nbo$, 
-               DockedCells] = If[
-               TrueQ[
-                MemberQ[
-                 CurrentValue["ModifierKeys"], "Control"]], 
-               DeleteCases[
-                Flatten[{
-                  CurrentValue[
-                  DefinitionNotebookClient`Stripes`PackagePrivate`nbo$, 
-                   DockedCells]}], 
-                Cell[
-                 Blank[], "StripeCell", 
-                 BlankNullSequence[]]], 
-               DeleteCases[
-                Flatten[{
-                  CurrentValue[
-                  DefinitionNotebookClient`Stripes`PackagePrivate`nbo$, 
-                   DockedCells]}], 
-                Condition[
-                 Pattern[DefinitionNotebookClient`Stripes`PackagePrivate`c$, 
-                  Blank[Cell]], 
-                 Not[
-                  FreeQ[
-                  DefinitionNotebookClient`Stripes`PackagePrivate`c$, 
-                   "51e5186d-9e21-4677-91a9-181ff2b354b7"]]]]]], Appearance -> 
-           None, BoxID -> "51e5186d-9e21-4677-91a9-181ff2b354b7", Evaluator -> 
-           Automatic, Method -> "Preemptive"], 
-          MouseAppearanceTag["LinkHand"]]}}, 
-       GridBoxAlignment -> {"Columns" -> {{Left}}, "Rows" -> {{Baseline}}}, 
-       AutoDelete -> False, 
-       GridBoxItemSize -> {
-        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"], 
-     "Text", FontSize -> 12, FontColor -> GrayLevel[0.25], StripOnInput -> 
-     False]], "StripeCell", CellFrameMargins -> {{20, 5}, {2, 2}}, 
-   CellFrame -> {{0, 0}, {1, 0}}, CellFrameColor -> GrayLevel[0.75]]},
+      EvaluationNotebook[], {TaggingRules, "ToolsOpen"}, True]]]},
 TaggingRules->{
  "ResourceType" -> "Paclet", "ResourceCreateNotebook" -> True, 
   "TemplateVersion" -> "2022.09.16", "CreationTimestamp" -> 
@@ -19072,9 +18877,8 @@ Fu6DuJJG2H9mK2QZ3X1Y8rjKVdsLU11Qbnfn/Mae/TiO1RZHs2bny+6Vwq5Sfi8TnHKi+1+K4NOh"]\
     "DefaultContentMethod" -> "Tagged", "HintPods" -> True, "LoadingMethod" -> 
     "Paclet", "PacletName" -> "PacletResource", "SourceID" -> 
     "92ce7a395baccd06b35bc67811577346991d7e35"}, "ToolsOpen" -> True, 
-  "StatusMessage" -> ProgressIndicator[Appearance -> "Necklace"], 
-  "SubmissionReviewData" -> {"Review" -> False}, "AutoUpdate" -> True, 
-  "TryRealOnly" -> False, 
+  "StatusMessage" -> "", "SubmissionReviewData" -> {"Review" -> False}, 
+  "AutoUpdate" -> True, "TryRealOnly" -> False, 
   "PacletBuildData" -> {
    "LastBuiltArchive" -> 
     "C:\\Users\\Kirill\\Projects\\TCPServer\\build\\KirillBelov__TCPServer-1.\
@@ -20100,6 +19904,7 @@ AsyncronousResourceInformationUpdates = False,
                 Quiet[
                  
                  Block[{$ContextPath = RSNB`$cp$, 
+                   
                    ResourceSystemClient`$\
 AsyncronousResourceInformationUpdates = False, 
                    DefinitionNotebookClient`$ButtonCodeID = None}, 
@@ -20750,6 +20555,7 @@ AsyncronousResourceInformationUpdates = False,
                 Quiet[
                  
                  Block[{$ContextPath = RSNB`$cp$, 
+                   
                    ResourceSystemClient`$\
 AsyncronousResourceInformationUpdates = False, 
                    DefinitionNotebookClient`$SuppressDynamicEvents = True, 
@@ -20931,7 +20737,6 @@ AsyncronousResourceInformationUpdates = False,
                     Null]; Null]]], "\"Publicly in the cloud\"" :> 
               With[{RSNB`nb$ = InputNotebook[], RSNB`$cp$ = $ContextPath}, 
                 Quiet[
-                 
                  Block[{$ContextPath = RSNB`$cp$, 
                    ResourceSystemClient`$\
 AsyncronousResourceInformationUpdates = False, 
@@ -21024,6 +20829,7 @@ AsyncronousResourceInformationUpdates = False,
                     GraphicsBox[{
                     Thickness[0.06349], 
                     StyleBox[{
+                    
                     FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 2,
                      0}, {0, 1, 0}, {0, 1, 0}}, {{0, 2, 0}, {0, 1, 0}, {0, 1, 
                     0}}, {{0, 2, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 2, 0}, {0, 1,
