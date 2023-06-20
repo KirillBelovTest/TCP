@@ -92,7 +92,7 @@ Module[{logger, client, extendedPacket, message, result},
 ]; 
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Internal methods*)
 
 
@@ -160,11 +160,13 @@ TCPServer /: sendResponse[server_TCPServer, client_SocketObject, result: _ByteAr
 Switch[result, 
 	_String, 
 		Print["[", DateString[], "] TCPServer sending response"]; 
-		WriteString[client, result], 
+		WriteString[client, result]; 
+		Print["[", DateString[], "] TCPServer response was sended."];, 
 	
 	_ByteArray, 
-		Print["[", DateString[], "] TCPServer sending response"]; 
-		BinaryWrite[client, result], 
+		Print["[", DateString[], "] TCPServer sending response..."]; 
+		BinaryWrite[client, result]; 
+		Print["[", DateString[], "] TCPServer response was sended."];, 
 	
 	Null, 
 		Print["[", DateString[], "] TCPServer handle message without response"]; 
@@ -181,8 +183,7 @@ If[KeyExistsQ[server["Buffer"], uuid],
 
 TCPServer /: clearBuffer[server_TCPServer, SocketObject[uuid_String]] := 
 If[KeyExistsQ[server["Buffer"], uuid], 
-	server["Buffer", uuid]["DropAll"]; 
-	server["Buffer"] = Delete[server["Buffer"], Key[uuid]]; 
+	server["Buffer", uuid]["DropAll"];  
 ]; 
 
 
