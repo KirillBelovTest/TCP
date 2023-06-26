@@ -183,7 +183,6 @@ If[KeyExistsQ[server["Buffer"], uuid],
 
 TCPServer /: clearBuffer[server_TCPServer, SocketObject[uuid_String]] := 
 If[KeyExistsQ[server["Buffer"], uuid], 
-	Print[server["Buffer"]]; 
 	server["Buffer", uuid]["DropAll"]; 
 ]; 
 
