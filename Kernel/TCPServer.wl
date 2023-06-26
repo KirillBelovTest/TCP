@@ -85,7 +85,7 @@ Module[{logger, client, extendedPacket, message, result},
 		message = getMessage[server, client, extendedPacket]; (*ByteArray[]*)
 		result = invokeHandler[server, client, message]; (*ByteArray[] | _String | Null*)
 		sendResponse[server, client, result]; 
-		clearBuffler[server, client], 
+		clearBuffer[server, client], 
 	(*Else*)
 		savePacketToBuffer[server, client, extendedPacket]
 	]; 
@@ -97,12 +97,12 @@ Module[{logger, client, extendedPacket, message, result},
 
 
 TCPServer /: getExtendedPacket[server_TCPServer, client: SocketObject[uuid_String], packet_Association] := 
-Module[{data, dataLength, buffer, last, expectedLength, storedLength, completed, completeHandler, defaultCompleteHandler}, 
-	
+Module[{logger, data, dataLength, buffer, last, expectedLength, storedLength, completed, completeHandler, defaultCompleteHandler, extendedPacket}, 
 	data = packet["DataByteArray"]; (*ByteArray[]*)
 	dataLength = Length[data]; 
 
-	Print["[", DateString[], "] TCPServer received ", dataLength, " bytes"]; 
+	logger = server["Logger"]; 
+	logger["received " <> ToString[dataLength] <> " bytes", data]; 
 
 	If[KeyExistsQ[server["Buffer"], uuid] && server["Buffer", uuid]["Length"] > 0, 
 		buffer = server["Buffer", uuid]; (*DataStructure[DynamicArray]*)
@@ -129,15 +129,15 @@ Module[{data, dataLength, buffer, last, expectedLength, storedLength, completed,
 
 
 TCPServer /: getMessage[server_TCPServer, client: SocketObject[uuid_String], extendedPacket_Association] := 
-If[KeyExistsQ[server["Buffer"], uuid] && server["Buffer", uuid]["Length"] > 0, 
-	Print["[", DateString[], "] TCPServer get full message with ", extendedPacket["ExpectedLength"], " bytes"]; 
+If[KeyExistsQ[server["Buffer"], uuid] && server["Buffer", uuid]["Length"] > 0,  
+	server["Logger"]["get full message with " <> ToString[extendedPacket["ExpectedLength"]] <> " bytes", extendedPacket]; 
 	
 	(*Return: _ByteArray*)
 	Apply[Join] @ 
 	Append[extendedPacket["DataByteArray"]] @ 
 	server["Buffer", uuid]["Elements"][[All, "DataByteArray"]], 
 (*Else*)
-	Print["[", DateString[], "] TCPServer get full message with ", extendedPacket["ExpectedLength"], " bytes"]; 
+	server["Logger"]["get full message with " <> ToString[extendedPacket["ExpectedLength"]] <> " bytes", extendedPacket]; 
 
 	(*Return: _ByteArray*)
 	extendedPacket["DataByteArray"]
@@ -146,7 +146,7 @@ If[KeyExistsQ[server["Buffer"], uuid] && server["Buffer", uuid]["Length"] > 0,
 
 TCPServer /: invokeHandler[server_TCPServer, client_SocketObject, message_ByteArray] := 
 Module[{messageHandler, defaultMessageHandler}, 
-	Print["[", DateString[], "] TCPServer invoke message handler"]; 
+	server["Logger"]["invoke message handler", message]; 
 
 	messageHandler = server["MessageHandler"]; 
 	defaultMessageHandler = server["DefaultMessageHandler"]; 
@@ -159,17 +159,17 @@ Module[{messageHandler, defaultMessageHandler},
 TCPServer /: sendResponse[server_TCPServer, client_SocketObject, result: _ByteArray | _String | Null] := 
 Switch[result, 
 	_String, 
-		Print["[", DateString[], "] TCPServer sending response"]; 
+		server["Logger"]["sending " <> ToString[StringLength[result]] <> " bytes response...", result]; 
 		WriteString[client, result]; 
-		Print["[", DateString[], "] TCPServer response was sended."];, 
+		server["Logger"]["response was sended.", result];, 
 	
 	_ByteArray, 
-		Print["[", DateString[], "] TCPServer sending response..."]; 
+		server["Logger"]["sending " <> ToString[Length[result]] <> " bytes response...", result]; 
 		BinaryWrite[client, result]; 
-		Print["[", DateString[], "] TCPServer response was sended."];, 
+		server["Logger"]["response was sended.", result];, 
 	
 	Null, 
-		Print["[", DateString[], "] TCPServer handle message without response"]; 
+		server["Logger"]["handle message without response", result]; 
 		Null
 ]; 
 
@@ -183,7 +183,8 @@ If[KeyExistsQ[server["Buffer"], uuid],
 
 TCPServer /: clearBuffer[server_TCPServer, SocketObject[uuid_String]] := 
 If[KeyExistsQ[server["Buffer"], uuid], 
-	server["Buffer", uuid]["DropAll"];  
+	Print[server["Buffer"]]; 
+	server["Buffer", uuid]["DropAll"]; 
 ]; 
 
 
