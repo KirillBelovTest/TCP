@@ -1,6 +1,7 @@
 #!/usr/bin/env wolframscript
 (* ::Package:: *)
 
+<<KirillBelov`CSocketListener`
 <<KirillBelov`TCPServer`
 
 
@@ -10,7 +11,9 @@ tcp = TCPServer[]
 tcp["MessageHandler"] = Function[{client, data}, Echo[data]]
 
 
-listener = SocketListen[8080, tcp@#&]
+listener = CSocketListen[8080, tcp@Echo@#&]
+
+Print[listener]
 
 
-While[True, Pause[0.01]]
+While[True, Pause[0.001]]
