@@ -72,7 +72,6 @@ CreateType[TCPServer, {
 
 server_TCPServer[packet_Association] := 
 Module[{logger, client, extendedPacket, message, result}, 
-	Echo[packet, "PACKET"];
 	client = packet["SourceSocket"]; (*SocketObject[] | CSocket[]*)
 	extendedPacket = getExtendedPacket[server, client, packet]; (*Association[]*)
 
@@ -128,12 +127,9 @@ TCPServer /: getMessage[server_TCPServer, client: (SocketObject | CSocket)[uuid_
 If[KeyExistsQ[server["Buffer"], uuid] && server["Buffer", uuid]["Length"] > 0,  
 
 	(*Return: _ByteArray*)
-	Echo[
-		Apply[Join] @ 
-		Append[extendedPacket["DataByteArray"]] @ 
-		server["Buffer", uuid]["Elements"][[All, "DataByteArray"]], 
-		"getMessage"
-	], 
+	Apply[Join] @ 
+	Append[extendedPacket["DataByteArray"]] @ 
+	server["Buffer", uuid]["Elements"][[All, "DataByteArray"]], 
 
 (*Else*)
 
