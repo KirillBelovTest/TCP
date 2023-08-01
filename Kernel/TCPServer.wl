@@ -142,7 +142,9 @@ If[KeyExistsQ[server["Buffer"], uuid] && server["Buffer", uuid]["Length"] > 0,
 
 	(*Return: _ByteArray*)
 	Apply[Join] @ 
-	Append[extendedPacket["DataByteArray"]] @ 
+	Append[extendedPacket["DataByteArray"][[
+		 ;; extendedPacket["DataLength"] - (extendedPacket["StoredLength"] - extendedPacket["ExpectedLength"])
+	]]] @ 
 	server["Buffer", uuid]["Elements"][[All, "DataByteArray"]], 
 
 (*Else*)
