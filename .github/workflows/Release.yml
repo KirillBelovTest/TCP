@@ -1,0 +1,128 @@
+name: Release
+on: 
+  workflow_dispatch:
+  push: 
+    branches:  ['release/*']
+env: 
+  RESOURCE_PUBLISHER_TOKEN: ${{ secrets.RESOURCE_PUBLISHER_TOKEN }}
+  WOLFRAMSCRIPT_ENTITLEMENTID: ${{ secrets.WOLFRAMSCRIPT_ENTITLEMENTID }}
+  WLPR_PACLET_SITE: https://resources.wolframcloud.com/PacletRepository/pacletsite
+jobs: 
+  Check: 
+    name: Check
+    runs-on: ubuntu-latest
+    container: 
+      image: wolframresearch/wolframengine:13.0.1
+      options: --user root
+    env: 
+      WOLFRAM_SYSTEM_ID: Linux-x86-64
+    steps: 
+    - name: Checkout
+      id: checkout-code-step
+      uses: actions/checkout@v3
+    - name: Check
+      id: check-paclet-step
+      uses: WolframResearch/check-paclet@v1.10.2
+      with: 
+        target: Submit
+        paclet_cicd_version: 0.34.0
+        definition_notebook: ./ResourceDefinition.nb
+        resource_system_base: https://www.wolframcloud.com/obj/resourcesystem/api/1.0
+    - name: UploadWorkflowValues
+      id: upload-workflow-values-step
+      if: always() && env.PACLET_WORKFLOW_VALUES
+      uses: actions/upload-artifact@v3
+      with: 
+        name: paclet-workflow-values
+        path: ${{ env.PACLET_WORKFLOW_VALUES }}
+        if-no-files-found: ignore
+  Test: 
+    name: Test
+    runs-on: ubuntu-latest
+    container: 
+      image: wolframresearch/wolframengine:13.0.1
+      options: --user root
+    env: 
+      WOLFRAM_SYSTEM_ID: Linux-x86-64
+    steps: 
+    - name: Checkout
+      id: checkout-code-step
+      uses: actions/checkout@v3
+    - name: Test
+      id: test-paclet-step
+      uses: WolframResearch/test-paclet@v1.10.2
+      with: 
+        target: Submit
+        paclet_cicd_version: 0.34.0
+        definition_notebook: ./ResourceDefinition.nb
+        resource_system_base: https://www.wolframcloud.com/obj/resourcesystem/api/1.0
+    - name: UploadWorkflowValues
+      id: upload-workflow-values-step
+      if: always() && env.PACLET_WORKFLOW_VALUES
+      uses: actions/upload-artifact@v3
+      with: 
+        name: paclet-workflow-values
+        path: ${{ env.PACLET_WORKFLOW_VALUES }}
+        if-no-files-found: ignore
+  Release: 
+    name: Release
+    needs:  [Check, Test]
+    runs-on: ubuntu-latest
+    container: 
+      image: wolframresearch/wolframengine:13.0.1
+      options: --user root
+    env: 
+      WOLFRAM_SYSTEM_ID: Linux-x86-64
+    timeout-minutes: 360
+    steps: 
+    - name: Checkout
+      id: checkout-code-step
+      uses: actions/checkout@v3
+    - name: DownloadWorkflowValues
+      id: download-workflow-values-step
+      uses: actions/download-artifact@v3
+      with: 
+        name: paclet-workflow-values
+        path: .paclet-workflow-values
+    - name: Build
+      id: build-paclet-step
+      uses: WolframResearch/build-paclet@v1.10.2
+      with: 
+        target: Submit
+        paclet_cicd_version: 0.34.0
+        definition_notebook: ./ResourceDefinition.nb
+        resource_system_base: https://www.wolframcloud.com/obj/resourcesystem/api/1.0
+    - name: UploadArtifact
+      id: upload-build-artifacts-step
+      uses: actions/upload-artifact@v3
+      with: 
+        path: ${{ env.PACLET_BUILD_DIR }}
+        if-no-files-found: ignore
+    - name: CreateRelease
+      id: create-release-step
+      uses: actions/create-release@v1
+      env: 
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with: 
+        tag_name: ${{ env.PACLET_RELEASE_TAG }}
+        release_name: Release ${{ env.PACLET_RELEASE_TAG }}
+        draft: false
+        prerelease: false
+    - name: UploadRelease
+      id: upload-release-asset-step
+      uses: actions/upload-release-asset@v1
+      env: 
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with: 
+        upload_url: ${{ steps.create-release-step.outputs.upload_url }}
+        asset_path: ${{ env.PACLET_PATH }}
+        asset_name: ${{ env.PACLET_FILE }}
+        asset_content_type: application/zip
+    - name: UploadWorkflowValues
+      id: upload-workflow-values-step
+      if: always() && env.PACLET_WORKFLOW_VALUES
+      uses: actions/upload-artifact@v3
+      with: 
+        name: paclet-workflow-values
+        path: ${{ env.PACLET_WORKFLOW_VALUES }}
+        if-no-files-found: ignore
