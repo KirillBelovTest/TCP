@@ -30,7 +30,11 @@
 (*Begin package*)
 
 
-BeginPackage["KirillBelov`TCPServer`", {"KirillBelov`Objects`", "KirillBelov`Internal`", "KirillBelov`CSocketListener`"}]; 
+BeginPackage["KirillBelov`TCPServer`", {
+	"KirillBelov`Objects`", 
+	"KirillBelov`Internal`", 
+	"KirillBelov`CSocketListener`"
+}]; 
 
 
 (* ::Section::Closed:: *)
@@ -71,7 +75,7 @@ CreateType[TCPServer, {
 
 
 server_TCPServer[packet_Association] := 
-Module[{logger, client, extendedPacket, message, result}, 
+Module[{logger, client, extendedPacket, message, result, extraPacket}, 
 	client = packet["SourceSocket"]; (*SocketObject[] | CSocket[]*)
 	extendedPacket = getExtendedPacket[server, client, packet]; (*Association[]*)
 
@@ -79,7 +83,17 @@ Module[{logger, client, extendedPacket, message, result},
 		message = getMessage[server, client, extendedPacket]; (*ByteArray[]*)
 		result = invokeHandler[server, client, message]; (*ByteArray[] | _String | Null*)
 		sendResponse[server, client, result]; 
-		clearBuffer[server, client], 
+
+		If[extendedPacket["StoredLength"] > extendedPacket["ExpectedLength"], 
+			extraPacket = packet; 
+			extraPacket["DataByteArray"] = extraPacket["DataByteArray"][[
+				- (extendedPacket["ExpectedLength"] - extendedPacket["StoredLength"]) ;; 
+			]]; 
+			clearBuffer[server, client]; 	
+			server[extraPacket], 
+		(*Else*)
+			clearBuffer[server, client]
+		], 
 	
 	(*Else*)
 		savePacketToBuffer[server, client, extendedPacket]
