@@ -25,7 +25,7 @@ TimeConstrained[While[True,
 ], 3]; 
 
 
-BinaryWrite[client, StringToByteArray["0123456789ABCDE"]]; 
+BinaryWrite[client, StringToByteArray[Echo["0123456789ABCDE", "Client Send"]]]; 
 
 
 TimeConstrained[While[True, 
