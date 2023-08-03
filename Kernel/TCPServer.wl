@@ -75,7 +75,7 @@ CreateType[TCPServer, {
 
 
 server_TCPServer[packet_Association] := 
-Module[{logger, client, extendedPacket, message, result, extraPacket}, 
+Module[{logger, client, extendedPacket, message, result, extraPacket, extraPacketDataLength}, 
 	client = packet["SourceSocket"]; (*SocketObject[] | CSocket[]*)
 	extendedPacket = getExtendedPacket[server, client, packet]; (*Association[]*)
 
@@ -86,9 +86,8 @@ Module[{logger, client, extendedPacket, message, result, extraPacket},
 
 		If[extendedPacket["StoredLength"] > extendedPacket["ExpectedLength"], 
 			extraPacket = packet; 
-			extraPacket["DataByteArray"] = extraPacket["DataByteArray"][[
-				- (extendedPacket["ExpectedLength"] - extendedPacket["StoredLength"]) ;; 
-			]]; 
+			extraPacketDataLength = extendedPacket["StoredLength"] - extendedPacket["ExpectedLength"]; 
+			extraPacket["DataByteArray"] = packet["DataByteArray"][[-extraPacketDataLength ;; ]]; 
 			clearBuffer[server, client]; 	
 			server[extraPacket], 
 		(*Else*)
@@ -141,16 +140,15 @@ TCPServer /: getMessage[server_TCPServer, client: (SocketObject | CSocket)[uuid_
 If[KeyExistsQ[server["Buffer"], uuid] && server["Buffer", uuid]["Length"] > 0,  
 
 	(*Return: _ByteArray*)
+	Part[#, 1 ;; extendedPacket["ExpectedLength"]]& @ 
 	Apply[Join] @ 
-	Append[extendedPacket["DataByteArray"][[
-		 ;; extendedPacket["DataLength"] - (extendedPacket["StoredLength"] - extendedPacket["ExpectedLength"])
-	]]] @ 
+	Append[extendedPacket["DataByteArray"]] @ 
 	server["Buffer", uuid]["Elements"][[All, "DataByteArray"]], 
 
 (*Else*)
 
 	(*Return: _ByteArray*)
-	extendedPacket["DataByteArray"]
+	extendedPacket["DataByteArray"][[1 ;; extendedPacket["ExpectedLength"]]]
 ];  
 
 
@@ -173,16 +171,6 @@ Switch[result,
 	_ByteArray, 
 		server["Logger"]["sending " <> ToString[Length[result]] <> " bytes response..."]; 
 		BinaryWrite[client, result];, 
-		(*Global`time = {}; 
-		Table[
-			AppendTo[Global`time, AbsoluteTiming[
-				Check[
-					BinaryWrite[client, result[[i ;; UpTo[i - 1 + 8 * 1024]]]], 
-					Pause[0.1]; BinaryWrite[client, result[[i ;; UpTo[i - 1 + 8 * 1024]]]]
-				]
-			][[1]]];, 
-			{i, 1, Length[result], 8 * 1024}
-		];,*) 
 	
 	_Association, 
 		If[KeyExistsQ[result, "Callback"] && KeyExistsQ[result, "Result"], 
