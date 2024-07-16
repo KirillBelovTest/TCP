@@ -74,11 +74,15 @@ CreateType[TCPServer, {
 
 
 server_TCPServer[packet_Association] := 
-Module[{logger, extendedPacket, message, result, extraPacket, extraPacketDataLength}, 
+Module[{logger, extendedPacket, result, extraPacket, extraPacketDataLength}, 
 	extendedPacket = getExtendedPacket[server, packet]; (*Association[]*)
 	
-	If[extendedPacket["Completed"], 
-		extendedPacket["DataByteArray"] = getMessage[server, extendedPacket]; (*ByteArray[]*) 
+	If[extendedPacket["Completed"] && extendedPacket["Event"] === "Received", 
+		With[{message = getMessage[server, extendedPacket]}, 
+			extendedPacket["DataByteArray"] := message; (*ByteArray[]*)
+			extendedPacket["Data"] := ByteArrayToString[message];
+			extendedPacket["DataBytes"] := Normal[message];
+		]; 
 		result = invokeHandler[server, extendedPacket]; (*ByteArray[] | _String | Null*)
 		sendResponse[server, packet, result]; 
 
@@ -90,7 +94,9 @@ Module[{logger, extendedPacket, message, result, extraPacket, extraPacketDataLen
 			server[extraPacket], 
 		(*Else*)
 			clearBuffer[server, extendedPacket]
-		], 
+		]; 
+		
+		Return[result], 
 	(*Else*)
 		savePacketToBuffer[server, extendedPacket]
 	]; 
@@ -160,6 +166,10 @@ Module[{messageHandler, defaultMessageHandler},
 ]; 
 
 
+TCPServer::cntsnd = 
+"Can't send result to the client\n `1`"; 
+
+
 TCPServer /: sendResponse[server_TCPServer, packet_Association, result: _ByteArray | _String | Null] := 
 With[{client = packet["SourceSocket"]}, 
 	Switch[result, 
@@ -173,6 +183,10 @@ With[{client = packet["SourceSocket"]},
 			Null
 	]
 ]; 
+
+
+TCPServer /: sendResponse[server_TCPServer, packet_Association, result_] := 
+Message[TCPServer::cntsnd, result]; 
 
 
 TCPServer /: savePacketToBuffer[server_TCPServer, extendedPacket_Association] := 
