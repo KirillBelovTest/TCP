@@ -27,17 +27,26 @@
 
 
 (* ::Section::Closed:: *)
+(*Requarements*)
+
+
+Once[Map[If[Length[PacletFind[#]] === 0, PacletInstall[#]]&][{
+	"KirillBelov/Objects", 
+	"KirillBelov/Internal"
+}]]; 
+
+
+(* ::Section::Closed:: *)
 (*Begin package*)
 
 
-BeginPackage["KirillBelov`TCPServer`", {
+BeginPackage["KirillBelov`TCP`", {
 	"KirillBelov`Objects`", 
 	"KirillBelov`Internal`"
 }]; 
 
 
 (* ::Section::Closed:: *)
-(*Names*)
 
 
 TCPServer::usage = 
@@ -139,11 +148,14 @@ With[{uuid = packet["SourceSocket"][[1]]},
 
 
 TCPServer /: getMessage[server_TCPServer, extendedPacket_Association] := 
-With[{uuid = extendedPacket["SourceSocket"][[1]]}, 
+With[{
+	uuid = extendedPacket["SourceSocket"][[1]], 
+	expectedLength = extendedPacket["ExpectedLength"]
+}, 
 	If[KeyExistsQ[server["Buffer"], uuid] && server["Buffer", uuid]["Length"] > 0,  
 
 		(*Return: _ByteArray*)
-		Part[#, 1 ;; extendedPacket["ExpectedLength"]]& @ 
+		Part[#, 1 ;; expectedLength]& @ 
 		Apply[Join] @ 
 		Append[extendedPacket["DataByteArray"]] @ 
 		server["Buffer", uuid]["Elements"][[All, "DataByteArray"]], 
@@ -151,7 +163,7 @@ With[{uuid = extendedPacket["SourceSocket"][[1]]},
 	(*Else*)
 
 		(*Return: _ByteArray*)
-		extendedPacket["DataByteArray"][[1 ;; extendedPacket["ExpectedLength"]]]
+		extendedPacket["DataByteArray"][[1 ;; expectedLength]]
 	]
 ];  
 

@@ -2,8 +2,8 @@
 
 PacletObject[
   <|
-    "Name" -> "KirillBelov/TCPServer",
-    "Description" -> "TCP Server",
+    "Name" -> "KirillBelov/TCP",
+    "Description" -> "TCP",
     "Creator" -> "Kirill Belov",
     "License" -> "MIT",
     "PublisherID" -> "KirillBelov",
@@ -13,7 +13,7 @@ PacletObject[
       {
         "Kernel",
         "Root" -> "Kernel",
-        "Context" -> {"KirillBelov`TCPServer`"},
+        "Context" -> {"KirillBelov`TCP`"},
         "Symbols" -> {}
       },
       {"Documentation", "Language" -> "English"},
